@@ -75,9 +75,12 @@ export const CrushingWheel = () => {
         <input {...register('rpm', { required: true })} />
       </label>
       {errors.rpm?.message && errors.rpm.message}
-      <button>Calculate</button>
+      <button className={classes['button-85']}>Calculate</button>
       <h3>Result:</h3>
-      {calculationResult} ticks = {(calculationResult / 20).toFixed(2)} seconds
+      <div className={classes.result}>
+        {calculationResult} ticks = {(calculationResult / 20).toFixed(2)}{' '}
+        seconds
+      </div>
     </form>
   )
 }

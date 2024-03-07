@@ -2,11 +2,18 @@
 import Layout from '../layouts/Layout.astro'
 import Card from '../components/Card.astro'
 import { CrushingWheel } from '../components/CrushingWheel'
+import { Millstone } from '../components/Millstone'
 ---
 
 <Layout title='Welcome to Astro.'>
   <main>
     <h1>Create mod processing speed calculator</h1>
+    All calculations are based on <a
+      href='https://create.fandom.com/wiki/Crushing_Wheel?so=search#Crushing_Speed'
+      >Crushing wheel</a
+    > and <a href='https://create.fandom.com/wiki/Millstone#Throughput_(Speed)'
+      >Millstone</a
+    > wikis
     <div class='itemDesc'>
       <h2>Crushing wheel processing speed</h2>
       <img src='Crushing_Wheel.webp' alt='crushing wheel' />
@@ -16,10 +23,15 @@ import { CrushingWheel } from '../components/CrushingWheel'
       <h2>Millstone processing speed</h2>
       <img src='Millstone.webp' alt='millstone' />
     </div>
+    <Millstone client:only />
   </main>
 </Layout>
 
 <style>
+  a {
+    color: yellow;
+  }
+
   main {
     margin: auto;
     padding: 1rem;
@@ -31,6 +43,7 @@ import { CrushingWheel } from '../components/CrushingWheel'
   }
 
   .itemDesc {
+    margin-top: 4rem;
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
