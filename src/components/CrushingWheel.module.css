@@ -1,0 +1,23 @@
+.disclaimer {
+  font-size: 12px;
+  opacity: 0.7;
+  flex-basis: 100%;
+  a {
+    color: yellow;
+  }
+  margin-bottom: 1.3rem;
+}
+
+.label {
+  flex-wrap: wrap;
+  display: flex;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px rgba(128, 128, 128, 0.173) solid;
+  padding-bottom: 0.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}

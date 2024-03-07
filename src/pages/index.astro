@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Card from '../components/Card.astro'
+import { CrushingWheel } from '../components/CrushingWheel'
+---
+
+<Layout title='Welcome to Astro.'>
+  <main>
+    <h1>Create mod processing speed calculator</h1>
+    <div class='itemDesc'>
+      <h2>Crushing wheel processing speed</h2>
+      <img src='Crushing_Wheel.webp' alt='crushing wheel' />
+    </div>
+    <CrushingWheel client:only />
+    <div class='itemDesc'>
+      <h2>Millstone processing speed</h2>
+      <img src='Millstone.webp' alt='millstone' />
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    width: 800px;
+    max-width: calc(100% - 2rem);
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  .itemDesc {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    img {
+      width: 200px;
+      object-fit: contain;
+    }
+  }
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+</style>
