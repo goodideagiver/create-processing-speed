@@ -1,4 +1,4 @@
-import { useForm, type SubmitHandler } from 'react-hook-form'
+import { useForm, type SubmitHandler, useWatch } from 'react-hook-form'
 import classes from './CrushingWheel.module.css'
 import { useState } from 'react'
 
@@ -15,8 +15,14 @@ export const CrushingWheel = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<Inputs>()
+
+  const rpmReactive = useWatch({
+    control,
+    name: 'rpm',
+  })
 
   const onSubmit: SubmitHandler<Inputs> = (
     { inputDelay, recipeDuration, rpm, stackSize },
@@ -33,7 +39,7 @@ export const CrushingWheel = () => {
     setCalculationResult(result)
   }
 
-  console.log(errors)
+  const animationRotationDuration = ((1 / rpmReactive) * 60).toPrecision(2)
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
@@ -47,8 +53,8 @@ export const CrushingWheel = () => {
           </a>{' '}
           for reference
         </span>
+        <span className={classes.error}>{errors.recipeDuration?.type}</span>
       </label>
-      <span>{errors.recipeDuration?.message}</span>
       <label className={classes.label}>
         <span>Input delay</span>
         <input {...register('inputDelay', { required: true })} />
@@ -58,8 +64,8 @@ export const CrushingWheel = () => {
           crushing wheel. Be aware that the use of belts to feed the funnel will
           add more delay.
         </p>
+        <span className={classes.error}>{errors.inputDelay?.type}</span>
       </label>
-      {errors.inputDelay?.message && errors.inputDelay.message}
       <label className={classes.label}>
         <span>Stack size</span>
         <input
@@ -69,12 +75,23 @@ export const CrushingWheel = () => {
         <span className={classes.disclaimer}>
           The stack size is the amount of items inputted in the range of 1-64
         </span>
+        <span className={classes.error}>{errors.stackSize?.type}</span>
       </label>
       <label className={classes.label}>
         <span>RPM</span>
         <input {...register('rpm', { required: true })} />
+        {!isNaN(Number(animationRotationDuration)) && (
+          <img
+            className={classes.rotate}
+            src='/create-processing-speed/favicon.svg'
+            style={{
+              width: '20px',
+              animationDuration: `${animationRotationDuration}s`,
+            }}
+          />
+        )}
+        {errors.rpm?.type}
       </label>
-      {errors.rpm?.message && errors.rpm.message}
       <button className={classes['button-85']}>Calculate</button>
       <h3>Result:</h3>
       <div className={classes.result}>
